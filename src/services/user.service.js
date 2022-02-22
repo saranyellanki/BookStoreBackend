@@ -10,8 +10,8 @@ export const newUser = async (body) => {
     const salt = await bcrypt.genSalt(10);
     body.password = await bcrypt.hash(body.password, salt);
     const data = await User.create(body);
-    let token = jwt.sign({ id: data._id, isVerified: data.isVerified }, process.env.IS_VERIFIED);
-    await mailer.main(data.email, token)
+    // let token = jwt.sign({ id: data._id, isVerified: data.isVerified }, process.env.IS_VERIFIED);
+    // await mailer.main(data.email, token)
     return data;
   } else {
     throw new Error("User already exist");
