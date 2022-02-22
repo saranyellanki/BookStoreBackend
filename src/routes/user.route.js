@@ -1,7 +1,7 @@
 import express from 'express';
 import * as userController from '../controllers/user.controller';
 import { newUserValidator, loginValidator } from '../validators/user.validator';
-import { userAuth } from '../middlewares/auth.middleware';
+// import { userAuth } from '../middlewares/auth.middleware';
 
 const router = express.Router();
 
@@ -13,5 +13,6 @@ router.post('/registration', newUserValidator, userController.newUser);
 
 //route to login user
 router.post('/login', loginValidator, userController.login)
+
 
 export default router;
