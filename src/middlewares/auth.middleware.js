@@ -11,13 +11,14 @@ import jwt from 'jsonwebtoken';
  */
 export const userAuth = async (req, res, next) => {
   try {
-    let bearerToken = req.params.token
-    jwt.verify(bearerToken, process.env.IS_VERIFIED, (err, decoded) => {
+    let bearerToken = req.headers['token']
+    jwt.verify(bearerToken, process.env.SECRET_KEY, (err, decoded) => {
       if (err) {
         return res.status(HttpStatus.BAD_REQUEST).json({
-          message: 'Not Authenticated'
+          message: 'UnAuthorized, please enter a valid token'
         });
       } else {
+        req.body['userId'] = decoded.id
         next();
       }
     });
