@@ -27,13 +27,6 @@ export const addToCart = async (req) => {
         isPurchased: false
       },
     }, { new: true });
-    await Book.findByIdAndUpdate({
-      _id: book._id
-    }, {
-      $set: {
-        quantity: availableQuantity - book.quantity
-      }
-    }, { new: true });
     return cart;
   } else {
     book.quantity = 1;
@@ -51,13 +44,6 @@ export const addToCart = async (req) => {
       "isPurchased": false
     })
     const newCart = await userCart.save();
-    await Book.findByIdAndUpdate({
-      _id: book._id
-    }, {
-      $set: {
-        quantity: availableQuantity - book.quantity
-      },
-    }, { new: true });
     return newCart;
   }
 }
