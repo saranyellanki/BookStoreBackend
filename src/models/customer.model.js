@@ -16,6 +16,9 @@ const customerDetailsSchema = new Schema ({
   state: {
     type: String,
     required: true
+  },
+  userId: {
+    type: String
   }
 },
 {
