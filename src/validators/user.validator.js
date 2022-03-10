@@ -19,8 +19,8 @@ export const newUserValidator = (req, res, next) => {
 
 export const loginValidator = (req, res, next) => {
   const loginValidate = Joi.object({
-    email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required(),
-    password: Joi.string().min(6).max(12).required()
+    email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
+    password: Joi.string().min(6).max(12)
   });
   const { error, value } = loginValidate.validate(req.body);
   if (error) {
