@@ -53,7 +53,7 @@ export const getCart = async (body) => {
     userId: body.userId
   })
   if (data == null) {
-    throw new Error("Cart is Empty")
+    return
   } else {
     return data
   }
@@ -85,6 +85,7 @@ export const removeItem = async (req) => {
   const existingCart = await Cart.findOne({
     userId: req.body.userId
   })
+  let book = await existingCart.book.find(bookInCart => bookInCart._id == req.params._id);
   let bookIndex = await existingCart.book.findIndex(bookInCart => bookInCart._id == req.params._id);
   existingCart.book.splice(bookIndex,1)
   const updateCart = await Cart.findByIdAndUpdate({
@@ -92,8 +93,8 @@ export const removeItem = async (req) => {
   }, {
     $set: {
       book: existingCart.book,
+      cart_total: existingCart.cart_total - book.quantity * book.price 
     },
   }, { new: true });
-  console.log(updateCart);
   return updateCart;
 }
