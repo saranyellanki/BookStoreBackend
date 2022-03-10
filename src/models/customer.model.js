@@ -11,11 +11,24 @@ const customerDetailsSchema = new Schema ({
   },
   city: {
     type: String,
-    required: true
+  },
+  landmark: {
+    type: String
   },
   state: {
     type: String,
-    required: true
+  },
+  name: {
+    type: String
+  },
+  phoneNumber: {
+    type: String
+  },
+  pincode: {
+    type: String
+  },
+  locality: {
+    type: String
   },
   userId: {
     type: String
